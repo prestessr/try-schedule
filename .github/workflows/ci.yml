@@ -27,7 +27,6 @@ jobs:
         with:
           name: log
           path: results/
-          retention-days: 2
 
 
       
