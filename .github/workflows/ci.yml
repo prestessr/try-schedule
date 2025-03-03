@@ -1,0 +1,24 @@
+name: Run The Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  EMAIL: ${{ secrets.EMAIL }}
+  SENHA: ${{ secrets.SENHA }}
+  ARDOC: ${{ secrets.ARDOC }}
+
+jobs:
+  automation:
+    runs-on: ubuntu-latest
+    container: ghcr.io/prestessr/robot-image-prestes:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Automation
+        run: robot -d results/ tests/
+      
