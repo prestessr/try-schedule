@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: 
+  schedule:
+    - cron: '0 */8 * * *'
 
 env:
   EMAIL: ${{ secrets.EMAIL }}
@@ -20,19 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Automation
-        run: xvfb-run --server-args="-screen 0 1366x768x24" robot --removekeywords NAME:\*Get\ Env\*  -d results tests
+        run: xvfb-run --server-args="-screen 0 1366x768x24" robot --removekeywords NAME:\*Get\ Env\* --removekeywords NAME:\*Input\ Text\* -d results tests
 
       - name: Upload Robot results
         uses: actions/upload-artifact@v4
         with:
           name: robot-log
           path: /__w/try-schedule/try-schedule/results/log.html
-
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: robot-log
-          path: download-log
-
-
+          retention-days: 2
       
