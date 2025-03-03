@@ -20,5 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Automation
-        run: robot -d results/ tests/
+        run: xvfb-run --server-args="-screen 0 1366x768x24" robot --removekeywords NAME:\*Get\ Env\*  -d results tests
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: log
+          path: results/
+          retention-days: 2
+
+
       
