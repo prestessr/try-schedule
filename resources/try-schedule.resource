@@ -42,6 +42,7 @@ Carregar Variaveis
     ${EMAIL}    Get Env Variable    EMAIL
     VAR    ${EMAIL}    ${EMAIL}    scope=SUITE    
     ${AR}    Get Env Variable    ARDOC
-    VAR    ${AR}    ${AR}    scope=SUITE    
+    VAR    ${AR}    ${AR}    scope=SUITE
+    Set Log Level    INFO    
 
     RETURN    
