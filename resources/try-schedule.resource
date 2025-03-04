@@ -35,9 +35,10 @@ Carregar Variaveis
 
     Load Env File
 
+    Set Log Level    NONE  
     ${PWD}    Get Env Variable    SENHA    
     LOG    ${PWD}    formatter=repr
-    VAR    ${PWD}    ${PWD}    scope=SUITE    
+    VAR    ${PWD}    ${PWD}    scope=SUITE 
     ${EMAIL}    Get Env Variable    EMAIL
     VAR    ${EMAIL}    ${EMAIL}    scope=SUITE    
     ${AR}    Get Env Variable    ARDOC
