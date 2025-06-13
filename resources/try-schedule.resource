@@ -9,7 +9,7 @@ ${PWD}
 ${EMAIL}
 
 *** Keywords ***
-Executar tentativa de schedule
+Executar Tentativa De Agendamento Online
     [Documentation]    asdasd
 
     
@@ -28,7 +28,7 @@ Executar tentativa de schedule
     Click Button    //*[@id="btnAutenticaUtilizador"]
     Element Should Contain    //*[@id="ctl00_ctl53_g_49abea8d_9129_4f50_bf46_33662dfac0a6_ctl00_lblAuthError"]
     ...        ${ERROR_RENOV}    
-    ...    PROVAVELMENTE DÁ PRA RENOVAR!
+    ...    PROVAVELMENTE DÁ PRA RENOVAR! CORRE!
 
 
 Carregar Variaveis

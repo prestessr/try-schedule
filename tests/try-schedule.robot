@@ -1,10 +1,10 @@
 *** Settings ***
-Documentation    Aqui fica o teste
+Documentation    Este teste serve meramente para tentar agendar a tão aguardada renovação de AR :)
 
 Resource    ../resources/try-schedule.resource
 Suite Setup    Carregar Variaveis
 Test Teardown    Close Browser
 
 *** Test Cases ***
-Verificar se ainda NÃO está disponível a renovação automática 
-    Executar tentativa de schedule
+Verificar Se A Renovação Automática Ainda Encontra-se Indisponível
+    Executar Tentativa De Agendamento Online
