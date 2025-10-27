@@ -18,7 +18,7 @@ env:
 
 jobs:
   automation:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container: ghcr.io/prestessr/robot-image-prestes:latest
     steps:
       - uses: actions/checkout@v4
