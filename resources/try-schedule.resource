@@ -1,34 +1,39 @@
 *** Settings ***
 
 Resource    ../config/package.resource
+Resource    ../config/DOM.resource
 
 *** Variables ***
-${ERROR_RENOV}    O título de residência que possui não permite a utilização da funcionalidade “renovação automática”. Para mais informações, o Centro de Contacto do SEF está ao seu dispor, todos os dias úteis, das 8:00 às 20:00 através dos números – 808 202 653 (rede fixa) ou 808 962 690 (rede móvel).    
-${AR}
+${EXPECT_1}    O seu processo está em análise.
+${EXPECT_2}    Se for necessário apresentar qualquer documento adicional, será contactado para o efeito.
 ${PWD}
 ${EMAIL}
+${PAGE}    https://portal-renovacoes.aima.gov.pt/ords/r/aima/aima-pr/pr-home
 
 *** Keywords ***
 Executar Tentativa De Agendamento Online
-    [Documentation]    asdasd
+    [Documentation]    fluxo completo de tentativa de agendamento
 
     
-    Open Browser    https://www.sef.pt/pt/Pages/pre-marcacao-online.aspx   Chrome
-    Wait Until Element Is Visible    //*[@id="pnlLogin"]/div
-    Click Element    //*[@id="pnlLogin"]/div
-    Wait Until Element Is Visible    //*[@id="login-box-id"]/div[2]/div/p
-    Input Text    //*[@id="txtUsername"]    ${EMAIL}
-    Input Password    //*[@id="txtPassword"]    ${PWD}
-    Click Element    //*[@id="btnLogin"]
-    Wait Until Element Is Visible    //*[@id="renovacaoAutomaticaLink"]
-    Click Element    //*[@id="renovacaoAutomaticaLink"]
-    Wait Until Element Is Visible    //*[@id="txtAuthPanelPassword"]
-    Input Password    //*[@id="txtAuthPanelPassword"]    ${PWD}
-    Input Text    //*[@id="txtAuthPanelDocument"]     ${AR}
-    Click Button    //*[@id="btnAutenticaUtilizador"]
-    Element Should Contain    //*[@id="ctl00_ctl53_g_49abea8d_9129_4f50_bf46_33662dfac0a6_ctl00_lblAuthError"]
-    ...        ${ERROR_RENOV}    
-    ...    PROVAVELMENTE DÁ PRA RENOVAR! CORRE!
+    Open Browser    ${PAGE}   Chrome
+    Wait Until Element Is Visible    ${BTN_ENTRAR}
+    Wait Until Element Is Visible    ${LINK_PORTAL}
+    Click Element    ${LINK_PORTAL}
+    Switch Window    title=Serviços - AIMA
+    Wait Until Element Is Visible    ${CHECKPOINT_PORTAL}
+    Click Element    ${LINK_AREA_PESSOAL}
+    Input Text    ${FORM_EMAIL}    ${EMAIL}
+    Input Password    ${FORM_PWD}    ${PWD}
+    Click Element    ${BTN_LOGIN}
+    Wait Until Element Is Visible    ${CHECKPOINT_AREA_PESSOAL}
+
+    Element Should Contain  ${STATUS_analise}
+    ...        ${EXPECT_1}    
+    ...    Provavelmente houve alteração de Status
+
+    Element Should Contain   ${STATUS_analise}
+    ...        ${EXPECT_2}    
+    ...    Provavelmente houve alteração de Status
 
 
 Carregar Variaveis
@@ -41,8 +46,6 @@ Carregar Variaveis
     VAR    ${PWD}    ${PWD}    scope=SUITE 
     ${EMAIL}    Get Env Variable    EMAIL
     VAR    ${EMAIL}    ${EMAIL}    scope=SUITE    
-    ${AR}    Get Env Variable    ARDOC
-    VAR    ${AR}    ${AR}    scope=SUITE
     Set Log Level    INFO    
 
     RETURN    
