@@ -7,4 +7,7 @@ Test Teardown    Close Browser
 
 *** Test Cases ***
 Verificar Se A Renovação Automática Ainda Encontra-se Indisponível
-    Executar Tentativa De Agendamento Online
+    [Documentation]    Verifica em qual status ainda se encontra
+    Acessar Portal
+    Fazer Login
+    Verificar Status "O seu processo está em análise."
