@@ -10,4 +10,4 @@ Verificar Se A Renovação Automática Ainda Encontra-se Indisponível
     [Documentation]    Verifica em qual status ainda se encontra
     Acessar Portal
     Fazer Login
-    Verificar Status "O seu processo está em análise."
+    Verificar Status "O seu processo está a aguardar a decisão por parte da AIMA."
